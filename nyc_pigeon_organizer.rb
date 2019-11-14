@@ -1,3 +1,6 @@
+require "pry"
+
+
 def nyc_pigeon_organizer(data)
   key_array = []
   value_array = []
@@ -14,15 +17,15 @@ def nyc_pigeon_organizer(data)
     temp_hash = Hash.new
     value_array[index].each {
       |key, value| index2 = 0 ;
-      temp_hash2 = Hash.new ;
       temp_array = []
       
       while index2 < value.length do 
         i = value[index2]
-        temp_hash2[i] = { pigeon_category=> [key.to_s] }
-        
-        
-        temp_hash = temp_hash.merge(temp_hash2)
+        if !temp_hash[i]
+          temp_hash[i] = { pigeon_category=> [key.to_s] }
+        else
+          temp_hash[i][pigeon_category] << key.to_s
+        end
         
         index2 += 1
       end ;
